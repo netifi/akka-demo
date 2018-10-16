@@ -1,0 +1,6 @@
+rootProject.name = 'reactivesummit-demo'
+include 'client'
+include 'records'
+include 'tournament'
+include 'ranking'
+include 'service-idl'
