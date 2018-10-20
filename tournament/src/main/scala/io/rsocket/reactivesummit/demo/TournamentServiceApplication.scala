@@ -15,9 +15,9 @@ import reactor.core.scala.publisher._
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, ExecutionContext}
 
-object RankingServiceApplication extends App {
+object TournamentServiceApplication extends App {
 
-  implicit val system: ActorSystem = ActorSystem("RankingServiceServer")
+  implicit val system: ActorSystem = ActorSystem("TournamentServiceServer")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
 
@@ -38,9 +38,11 @@ object RankingServiceApplication extends App {
 
   val registry = new ProteusMeterRegistrySupplier(proteus, None, None, None).get()
   val tracer = new ProteusTracerSupplier(proteus, None).get()
-  val rankingService = new DefaultRankingService()
+  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"), registry, tracer)
+  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"), registry, tracer)
+  val tournamentService = new DefaultTournamentService(recordsService, rankingService)
 
-  proteus.addService(new RankingServiceServer(rankingService, Option(registry), Option(tracer)))
+  proteus.addService(new TournamentServiceServer(tournamentService, Option(registry), Option(tracer)))
 
   val result: Mono[Void] = proteus.onClose
   Await.result(result.toFuture, Duration.Inf)

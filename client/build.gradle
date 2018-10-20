@@ -26,6 +26,7 @@ configurations.all {
     resolutionStrategy {
         dependencySubstitution {
             substitute module('com.google.guava:guava') with module('com.google.guava:guava:22.0')
+            substitute module('io.netifi.proteus:proteus-client') with module('io.netifi.proteus:proteus-client:0.9.5')
         }
     }
 }

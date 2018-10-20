@@ -30,21 +30,15 @@ dependencies {
     compile "io.r2dbc:r2dbc-postgresql:1.0.0.M5"
     compile "org.springframework.data:spring-data-commons:2.1.0.RELEASE"
     compile "org.springframework.data:spring-data-jdbc:1.0.0.r2dbc-SNAPSHOT"
-
-    //latest netty because conflict with netty 0.7.9
-    compile "io.projectreactor.netty:reactor-netty:0.8.1.BUILD-SNAPSHOT"
-    compile "io.projectreactor:reactor-core:3.2.0.RELEASE"
-
-    //export micrometer/prometheus
-    compile "org.springframework.boot:spring-boot-starter-webflux"
-    compile "org.springframework.boot:spring-boot-starter-actuator"
-    compile "io.micrometer:micrometer-registry-prometheus"
 }
 
 configurations.all {
     resolutionStrategy {
         dependencySubstitution {
             substitute module('com.google.guava:guava') with module('com.google.guava:guava:22.0')
+            substitute module('io.netifi.proteus:proteus-client') with module('io.netifi.proteus:proteus-client:0.9.5')
+            substitute module('io.projectreactor:reactor-core') with module('io.projectreactor:reactor-core:3.2.1.RELEASE')
+            substitute module('io.projectreactor.addons:reactor-extra') with module('io.projectreactor.addons:reactor-extra:3.2.0.RELEASE')
         }
     }
 }
