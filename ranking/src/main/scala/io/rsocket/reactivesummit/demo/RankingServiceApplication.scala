@@ -9,11 +9,9 @@ import io.netifi.proteus.Proteus
 import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
 import io.netifi.proteus.tracing.ProteusTracerSupplier
 import io.rsocket.transport.akka.client.TcpClientTransport
-import reactor.core.scala.publisher.PimpMyPublisher._
 import reactor.core.scala.publisher._
 
-import scala.concurrent.duration.Duration
-import scala.concurrent.{Await, ExecutionContext}
+import scala.concurrent.ExecutionContext
 
 object RankingServiceApplication extends App {
 
@@ -41,7 +39,4 @@ object RankingServiceApplication extends App {
   val rankingService = new DefaultRankingService()
 
   proteus.addService(new RankingServiceServer(rankingService, Option(registry), Option(tracer)))
-
-  val result: Mono[Void] = proteus.onClose
-  Await.result(result.toFuture, Duration.Inf)
 }

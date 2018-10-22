@@ -1,4 +1,4 @@
-package io.rsocket.reactivesummit.demo
+package io.rsocket.reactivesummit.demo.client
 
 import java.net.InetSocketAddress
 
@@ -6,14 +6,12 @@ import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import com.typesafe.config._
 import io.netifi.proteus.Proteus
-import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
-import io.netifi.proteus.tracing.ProteusTracerSupplier
+import io.rsocket.reactivesummit.demo.{RankingServiceClient, RecordsServiceClient, TournamentServiceClient}
 import io.rsocket.transport.akka.client.TcpClientTransport
-import reactor.core.scala.publisher._
 
 import scala.concurrent.ExecutionContext
 
-object TournamentServiceApplication extends App {
+object ClientApplication extends App {
 
   implicit val system: ActorSystem = ActorSystem("TournamentServiceServer")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
@@ -33,11 +31,11 @@ object TournamentServiceApplication extends App {
     })
     .build()
 
-  val registry = new ProteusMeterRegistrySupplier(proteus, None, None, None).get()
-  val tracer = new ProteusTracerSupplier(proteus, None).get()
-  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"), registry, tracer)
-  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"), registry, tracer)
-  val tournamentService = new DefaultTournamentService(recordsService, rankingService)
+  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"))
+  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"))
+  val tournamentService = new TournamentServiceClient(proteus.group("reactivesummit.demo.tournament"))
 
-  proteus.addService(new TournamentServiceServer(tournamentService, Option(registry), Option(tracer)))
+  ClientRunner(recordsService, rankingService, tournamentService)
+    .doFinally(signalType => system.terminate())
+    .block()
 }

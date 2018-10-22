@@ -4,6 +4,7 @@ import java.net.InetSocketAddress
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
+import akka.stream.alpakka.slick.javadsl.SlickSession
 import com.typesafe.config._
 import io.netifi.proteus.Proteus
 import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
@@ -13,11 +14,14 @@ import reactor.core.scala.publisher._
 
 import scala.concurrent.ExecutionContext
 
-object TournamentServiceApplication extends App {
+object RecordsServiceApplication extends App {
 
-  implicit val system: ActorSystem = ActorSystem("TournamentServiceServer")
+  implicit val system: ActorSystem = ActorSystem("RankingServiceServer")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
+
+  implicit val session: SlickSession = SlickSession.forConfig("slick-postgres")
+  system.registerOnTermination(session.close())
 
   val conf: Config = ConfigFactory.load()
   val proteus: Proteus = Proteus.builder()
@@ -35,9 +39,7 @@ object TournamentServiceApplication extends App {
 
   val registry = new ProteusMeterRegistrySupplier(proteus, None, None, None).get()
   val tracer = new ProteusTracerSupplier(proteus, None).get()
-  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"), registry, tracer)
-  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"), registry, tracer)
-  val tournamentService = new DefaultTournamentService(recordsService, rankingService)
+  val recordsService = new DefaultRecordsService()
 
-  proteus.addService(new TournamentServiceServer(tournamentService, Option(registry), Option(tracer)))
+  proteus.addService(new RecordsServiceServer(recordsService, Option(registry), Option(tracer)))
 }
