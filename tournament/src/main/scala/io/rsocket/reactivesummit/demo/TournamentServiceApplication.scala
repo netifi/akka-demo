@@ -15,7 +15,7 @@ import scala.concurrent.ExecutionContext
 
 object TournamentServiceApplication extends App {
 
-  implicit val system: ActorSystem = ActorSystem("TournamentServiceServer")
+  implicit val system: ActorSystem = ActorSystem("TournamentService")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
 

@@ -13,7 +13,7 @@ import scala.concurrent.ExecutionContext
 
 object ClientApplication extends App {
 
-  implicit val system: ActorSystem = ActorSystem("TournamentServiceServer")
+  implicit val system: ActorSystem = ActorSystem("Client")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
 
@@ -36,6 +36,5 @@ object ClientApplication extends App {
   val tournamentService = new TournamentServiceClient(proteus.group("reactivesummit.demo.tournament"))
 
   ClientRunner(recordsService, rankingService, tournamentService)
-    .doFinally(signalType => system.terminate())
     .block()
 }

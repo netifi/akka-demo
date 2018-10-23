@@ -16,7 +16,7 @@ import scala.concurrent.ExecutionContext
 
 object RecordsServiceApplication extends App {
 
-  implicit val system: ActorSystem = ActorSystem("RankingServiceServer")
+  implicit val system: ActorSystem = ActorSystem("RecordsService")
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
 

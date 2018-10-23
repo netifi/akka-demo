@@ -13,6 +13,32 @@ object ClientRunner {
             rankingService: RankingServiceClient,
             tournamentService: TournamentServiceClient): Mono[Void] = {
 
+    val request = RecordsRequest.newBuilder().setMaxResults(40).build()
+    recordsService.records(request)
+        .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
+        .then()
+
+/*
+    val request = RankingRequest.newBuilder()
+      .addRecords(Record.newBuilder()
+        .setId(0)
+        .setName("Ryland Degnan")
+        .setDescription("Co-founder and CTO, Netifi")
+        .setThumbnail("https://attendease-event-content.s3.us-west-2.amazonaws.com/events/521abb61-6216-487e-a721-db53fa7003ac/upload/content/f5060af654de642b167c.jpg")
+        .setStoryCount(10))
+      .addRecords(Record.newBuilder
+        .setId(1)
+        .setName("Stephane Maldini")
+        .setDescription("Reactive Engineering Cook, Pivotal")
+        .setThumbnail("https://attendease-event-content.s3.us-west-2.amazonaws.com/events/521abb61-6216-487e-a721-db53fa7003ac/upload/content/aa207287b449bdd02dee.jpg")
+        .setStoryCount(20))
+      .build()
+
+    rankingService.rank(request)
+      .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
+      .then()
+*/
+/*
     val request = RecordsRequest.newBuilder().setMaxResults(256).build()
     tournamentService.tournament(request)
       .doOnNext(result => logger.info(JsonFormat.printer().print(result)))
@@ -20,32 +46,9 @@ object ClientRunner {
       .doOnSuccess(result =>
         logger.info(
           "\n=----------------------------------------------------------=" +
-          "\n< @_@ > SUPER WINNER < @_@ >  ===> " + result.getWinner.getSuperName +
-          "\n=----------------------------------------------------------="))
+            "\n< @_@ > SUPER WINNER < @_@ >  ===> " + result.getWinner.getSuperName +
+            "\n=----------------------------------------------------------="))
       .then()
-
-    /*
-    val request = RecordsRequest.newBuilder().setMaxResults(40).build()
-    recordsService.records(request)
-        .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
-        .then()
-    */
-
-    /*
-    val request = RankingRequest.newBuilder()
-      .addRecords(Record.newBuilder()
-        .setId(0)
-        .setName("Ryland Degnan")
-        .setDescription("Co-founder and CTO, Netifi")
-        .setThumbnail("https://attendease-event-content.s3.us-west-2.amazonaws.com/events/521abb61-6216-487e-a721-db53fa7003ac/upload/content/f5060af654de642b167c.jpg"))
-      .addRecords(Record.newBuilder
-        .setId(1)
-        .setName("Stephane Maldini")
-        .setDescription("Reactive Engineering Cook, Pivotal")
-        .setThumbnail("https://attendease-event-content.s3.us-west-2.amazonaws.com/events/521abb61-6216-487e-a721-db53fa7003ac/upload/content/aa207287b449bdd02dee.jpg"))
-      .build()
-    rankingService.rank(request)
-      .then()
-    */
+*/
   }
 }
