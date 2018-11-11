@@ -4,13 +4,13 @@ import java.net.InetSocketAddress
 
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
-import akka.stream.alpakka.slick.javadsl.SlickSession
 import com.typesafe.config._
 import io.netifi.proteus.Proteus
 import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
 import io.netifi.proteus.tracing.ProteusTracerSupplier
 import io.rsocket.transport.akka.client.TcpClientTransport
 import reactor.core.scala.publisher._
+import slick.basic.DatabaseConfig
 
 import scala.concurrent.ExecutionContext
 
@@ -20,8 +20,8 @@ object RecordsServiceApplication extends App {
   implicit val materializer: ActorMaterializer = ActorMaterializer()
   implicit val executionContext: ExecutionContext = system.dispatcher
 
-  implicit val session: SlickSession = SlickSession.forConfig("slick-postgres")
-  system.registerOnTermination(session.close())
+  implicit val session: DatabaseConfig[PostgresProfile] = DatabaseConfig.forConfig("postgres")
+  system.registerOnTermination(session.db.close())
 
   val conf: Config = ConfigFactory.load()
   val proteus: Proteus = Proteus.builder()

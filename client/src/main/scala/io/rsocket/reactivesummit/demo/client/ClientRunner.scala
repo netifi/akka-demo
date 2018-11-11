@@ -13,7 +13,7 @@ object ClientRunner {
             rankingService: RankingServiceClient,
             tournamentService: TournamentServiceClient): Mono[Void] = {
 
-    val request = RecordsRequest.newBuilder().setMaxResults(40).build()
+    val request = RecordsRequest.newBuilder().setMaxResults(400).build()
     recordsService.records(request)
         .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
         .then()

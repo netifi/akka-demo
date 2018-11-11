@@ -18,13 +18,11 @@ subprojects {
 
     ext {
         protobufVersion = '3.6.1'
-        rsocketRpcVersion = '0.2.4'
+        rsocketRpcVersion = '0.2.10'
+        proteusVersion = '1.5.2'
     }
 
     repositories {
         jcenter()
-        maven {
-            url  "https://dl.bintray.com/netifi/netifi-oss"
-        }
     }
 }
