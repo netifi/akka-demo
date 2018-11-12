@@ -11,8 +11,6 @@ dependencies {
 
     compile 'com.typesafe:config:1.3.2'
     compile "io.netifi.proteus:proteus-client:$proteusVersion"
-    compile "io.netifi.proteus:proteus-metrics-micrometer:$proteusVersion"
-    compile "io.netifi.proteus:proteus-tracing-openzipkin:$proteusVersion"
     compile 'io.rsocket:rsocket-transport-akka_2.12:0.0.6'
     compile 'io.projectreactor:reactor-scala-extensions_2.12:0.3.5'
     compile 'org.apache.logging.log4j:log4j-core:2.9.0'

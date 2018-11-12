@@ -6,8 +6,6 @@ import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import com.typesafe.config._
 import io.netifi.proteus.Proteus
-import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
-import io.netifi.proteus.tracing.ProteusTracerSupplier
 import io.rsocket.transport.akka.client.TcpClientTransport
 import reactor.core.scala.publisher._
 import slick.basic.DatabaseConfig
@@ -37,9 +35,7 @@ object RecordsServiceApplication extends App {
     })
     .build()
 
-  val registry = new ProteusMeterRegistrySupplier(proteus, None, None, None).get()
-  val tracer = new ProteusTracerSupplier(proteus, None).get()
   val recordsService = new DefaultRecordsService()
 
-  proteus.addService(new RecordsServiceServer(recordsService, Option(registry), Option(tracer)))
+  proteus.addService(new RecordsServiceServer(recordsService, None, None))
 }

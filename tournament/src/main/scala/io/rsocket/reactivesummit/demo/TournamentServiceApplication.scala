@@ -6,8 +6,6 @@ import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import com.typesafe.config._
 import io.netifi.proteus.Proteus
-import io.netifi.proteus.micrometer.ProteusMeterRegistrySupplier
-import io.netifi.proteus.tracing.ProteusTracerSupplier
 import io.rsocket.transport.akka.client.TcpClientTransport
 import reactor.core.scala.publisher._
 
@@ -33,11 +31,9 @@ object TournamentServiceApplication extends App {
     })
     .build()
 
-  val registry = new ProteusMeterRegistrySupplier(proteus, None, None, None).get()
-  val tracer = new ProteusTracerSupplier(proteus, None).get()
-  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"), registry, tracer)
-  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"), registry, tracer)
+  val recordsService = new RecordsServiceClient(proteus.group("reactivesummit.demo.records"))
+  val rankingService = new RankingServiceClient(proteus.group("reactivesummit.demo.ranking"))
   val tournamentService = new DefaultTournamentService(recordsService, rankingService)
 
-  proteus.addService(new TournamentServiceServer(tournamentService, Option(registry), Option(tracer)))
+  proteus.addService(new TournamentServiceServer(tournamentService, None, None))
 }

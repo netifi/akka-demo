@@ -56,6 +56,6 @@
   "scripts": {
     "build": "webpack",
     "start": "webpack; node src/main/js/server.js",
-    "protoc": "protoc --proto_path=../service-idl/src/main/proto/io/rsocket/reactivesummit/demo --proto_path=node_modules/rsocket-rpc-protobuf/app/proto --js_out=import_style=commonjs,binary:src/main/js/proto --rsocket_rpc_out=src/main/js/proto --plugin=protoc-gen-rsocket_rpc=node_modules/.bin/rsocket_rpc_js_protoc_plugin ../service-idl/src/main/proto/io/rsocket/reactivesummit/demo/service.proto"
+    "protoc": "protoc --proto_path=../service-idl/src/main/proto/io/rsocket/reactivesummit/demo --proto_path=node_modules/rsocket-rpc-protobuf/proto --js_out=import_style=commonjs,binary:src/main/js/proto --rsocket_rpc_out=src/main/js/proto --plugin=protoc-gen-rsocket_rpc=node_modules/.bin/rsocket_rpc_js_protoc_plugin ../service-idl/src/main/proto/io/rsocket/reactivesummit/demo/service.proto"
   }
 }
