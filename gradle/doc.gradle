@@ -19,7 +19,7 @@ configure(rootProject) {
 
 	doLast {
 	  file("$outputDir/pdf/index.pdf").renameTo(
-		"$outputDir/pdf/spring-superheroes-reference-guide-${version}.pdf"
+		"$outputDir/pdf/akka-superheroes-reference-guide-${version}.pdf"
 	  )
 	  file("$outputDir/html5").renameTo(
 		"$projectDir/docs"

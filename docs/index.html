@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
 <meta name="author" content="unspecified">
-<title>Proteus-Spring Reference Guide</title>
+<title>Proteus-Akka Reference Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -513,7 +513,7 @@ table.CodeRay td.code>pre{padding:0}
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Proteus-Spring Reference Guide</h1>
+<h1>Proteus-Akka Reference Guide</h1>
 <div class="details">
 <span id="author" class="author">unspecified</span><br>
 </div>
@@ -536,8 +536,8 @@ table.CodeRay td.code>pre{padding:0}
 <h2 id="_intro"><a class="anchor" href="#_intro"></a>1. Intro</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>Welcome to end-to-end Reactive World with RSocket, R2BDC, Project Reactor, Spring Framework, and Proteus Framework. In this guide, we are going to learn new horizon of Reactive communication in Microservice world using a new reactive protocol called <a href="http://rsocket.io/">RSocket</a>. Along with that, we are going to use here <a href="https://www.netifi.com/proteus">Proteus Framework</a> which simplify a lot usage of the RSocket
-protocol. Finally, we are going to use Spring Framework which allows building a full-fledged Web Application.</p>
+<p>Welcome to end-to-end Reactive World with RSocket, Slick, Akka, and Proteus Framework. In this guide, we are going to learn new horizon of Reactive communication in Microservice world using a new reactive protocol called <a href="http://rsocket.io/">RSocket</a>. Along with that, we are going to use here <a href="https://www.netifi.com/proteus">Proteus Framework</a> which simplify a lot usage of the RSocket
+protocol.</p>
 </div>
 <div class="paragraph">
 <p>In this guideline, we are building a system of ranking Marvel Superheroes. All information about Superheroes in the Marvel World is stored in the Postgres database.
@@ -682,7 +682,7 @@ advantages of this mesh service around Postgres is that it communicates with the
 </div>
 <div class="paragraph">
 <p>As we may see from the figure above, our solution is intensively using Proteus and
-Spring Frameworks. Also, the communication between services is wired with the
+Akka Frameworks. Also, the communication between services is wired with the
 support of the RSocket protocol. One of the central benefits of RSocket is the support of
 backpressure of the logical elements' level. It means that we can propagate the demand
 in the stream not only on java level, but through the network, so the <code>.request(1)</code> is
@@ -701,7 +701,7 @@ the service.</p>
 <p>As we can see, the interaction between components follows the Reactive Streams specification. Also, the client is fully responsible for controlling the demands, since it is the initiator of the communication, so his demand is valued by all service. One point that should be noticed here is that only in one place we request 2 elements instead of 1. That point is an interaction between Tournament and Records services. Here, in order to run the ranking competition, Tournament service for the first ranking round requires 2 heroes, so the first request to Records service is in size  2, where for the rest of the ranking competition, Tournament service uses the winner of the previous round so for the rest of competition it requests only 1 next superhero.</p>
 </div>
 <div class="paragraph">
-<p>In this section, we have completed the overview of the basic design and interaction model between the components in the next section we are going to build our services using Spring Framework and Proteus.</p>
+<p>In this section, we have completed the overview of the basic design and interaction model between the components in the next section we are going to build our services using Akka Framework and Proteus.</p>
 </div>
 <div class="paragraph">
 <p><a href="https://github.com/reactor/reactor-core/edit/master/src/docs/asciidoc/designOverview.adoc" class="fa fa-edit" title="Suggest an edit to the above section via github">Suggest Edit</a>

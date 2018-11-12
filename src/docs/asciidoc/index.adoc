@@ -1,4 +1,4 @@
-= Proteus-Spring Reference Guide
+= Proteus-Akka Reference Guide
 ifndef::host-github[:ext-relative: {outfilesuffix}]
 {appversion}
 :doctype: book
