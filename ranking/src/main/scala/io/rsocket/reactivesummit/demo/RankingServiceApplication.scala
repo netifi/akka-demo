@@ -5,7 +5,6 @@ import java.net.InetSocketAddress
 import akka.actor.ActorSystem
 import akka.stream.ActorMaterializer
 import com.typesafe.config._
-//import io.netifi.client.Proteus
 import com.netifi.broker.BrokerClient
 import io.rsocket.transport.akka.client.TcpClientTransport
 import reactor.core.scala.publisher._

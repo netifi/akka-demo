@@ -1,4 +1,4 @@
-= Proteus-Akka Reference Guide
+= Netifi-Akka Reference Guide
 ifndef::host-github[:ext-relative: {outfilesuffix}]
 {appversion}
 :doctype: book

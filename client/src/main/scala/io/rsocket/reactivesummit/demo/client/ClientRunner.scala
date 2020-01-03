@@ -13,13 +13,12 @@ object ClientRunner {
             rankingService: RankingServiceClient,
             tournamentService: TournamentServiceClient): Mono[Void] = {
 
-    /* val request1 = RecordsRequest.newBuilder().setMaxResults(400).build()
+    val request1 = RecordsRequest.newBuilder().setMaxResults(400).build()
     recordsService.records(request1)
         .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
         .then()
-    */
 
-    val request2 = RankingRequest.newBuilder()
+    /* val request2 = RankingRequest.newBuilder()
       .addRecords(Record.newBuilder()
         .setId(0)
         .setName("Ryland Degnan")
@@ -37,6 +36,7 @@ object ClientRunner {
     rankingService.rank(request2)
       .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
       .then()
+    */
 
     /* val request3 = RecordsRequest.newBuilder().setMaxResults(256).build()
     tournamentService.tournament(request3)
