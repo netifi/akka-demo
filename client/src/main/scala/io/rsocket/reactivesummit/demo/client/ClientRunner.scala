@@ -13,13 +13,13 @@ object ClientRunner {
             rankingService: RankingServiceClient,
             tournamentService: TournamentServiceClient): Mono[Void] = {
 
-    val request = RecordsRequest.newBuilder().setMaxResults(400).build()
-    recordsService.records(request)
+    /* val request1 = RecordsRequest.newBuilder().setMaxResults(400).build()
+    recordsService.records(request1)
         .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
         .then()
+    */
 
-/*
-    val request = RankingRequest.newBuilder()
+    val request2 = RankingRequest.newBuilder()
       .addRecords(Record.newBuilder()
         .setId(0)
         .setName("Ryland Degnan")
@@ -34,13 +34,12 @@ object ClientRunner {
         .setStoryCount(20))
       .build()
 
-    rankingService.rank(request)
+    rankingService.rank(request2)
       .doOnNext(record => logger.info(JsonFormat.printer().print(record)))
       .then()
-*/
-/*
-    val request = RecordsRequest.newBuilder().setMaxResults(256).build()
-    tournamentService.tournament(request)
+
+    /* val request3 = RecordsRequest.newBuilder().setMaxResults(256).build()
+    tournamentService.tournament(request3)
       .doOnNext(result => logger.info(JsonFormat.printer().print(result)))
       .last()
       .doOnSuccess(result =>
@@ -49,6 +48,6 @@ object ClientRunner {
             "\n< @_@ > SUPER WINNER < @_@ >  ===> " + result.getWinner.getSuperName +
             "\n=----------------------------------------------------------="))
       .then()
-*/
+      */
   }
 }
