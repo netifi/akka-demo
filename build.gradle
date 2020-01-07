@@ -18,11 +18,12 @@ subprojects {
 
     ext {
         protobufVersion = '3.6.1'
-        rsocketRpcVersion = '0.2.10'
-        proteusVersion = '1.5.2'
+        rsocketRpcVersion = '0.2.19'
+        netifiVersion = '1.6.10'
     }
 
     repositories {
         jcenter()
+        maven { url 'http://repo.spring.io/libs-milestone' }
     }
 }

@@ -2,6 +2,7 @@ package io.rsocket.reactivesummit.demo
 
 import io.netty.buffer.ByteBuf
 import reactor.core.publisher.Mono
+
 import scala.collection.JavaConverters._
 
 class DefaultRankingService extends RankingService {

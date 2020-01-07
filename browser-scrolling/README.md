@@ -1,5 +1,5 @@
 # reactivesummit-demo
-Demo application for [Netifi Proteus](https://www.netifi.com) and [RSocket](http://rsocket.io).
+Demo application for [Netifi](https://www.netifi.com) and [RSocket](http://rsocket.io).
 
 ## Preparing the Demo
 
@@ -68,12 +68,12 @@ To edit the homepage (including the JavaScript example code), do the following:
     - The _service_ must implement ReactiveSocket methods
         - `fireAndForget`, `requestResponse`, `requestStream`, `requestChannel`, `pushMetadata`
         - Thing to note here, `requestChannel` and `pushMetadata` are not implemented by the RSocketJS library, so these don't work at the moment
-    - The _client_ should use the Proteus Gateway to create a "group" routed connection, as the PingPong client does
-    - Register the new service with the Proteus Gateway with a unique name as the PingPong service does
-    `proteus.addService('my.new.service.id', myNewServiceImplementation);`
+    - The _client_ should use the Netifi Broker to create a "group" routed connection, as the PingPong client does
+    - Register the new service with the Netifi Brokr with a unique name as the PingPong service does
+    `client.addService('my.new.service.id', myNewServiceImplementation);`
   
 ## Bugs and Feedback
-For bugs, questions, and discussions please use the [Github Issues](https://github.com/netifi-proteus/proteus-browser-demo/issues).
+For bugs, questions, and discussions please use the [Github Issues](https://github.com/netifi/akka-demo/issues).
 
 ## License
 Copyright 2018 [Netifi Inc.](https://www.netifi.com)

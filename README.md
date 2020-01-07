@@ -1,5 +1,5 @@
 # ReactiveSummit Superheroes Demo
-This project provides a scaffolding for getting up and running quickly with [Netifi Proteus](http://www.netifi.com/proteus.html) on [Akka](https://akka.io/)
+This project provides a scaffolding for getting up and running quickly with [Netifi](http://docs.netifi.com/) on [Akka](https://akka.io/)
 
 ## Following Guideline
 

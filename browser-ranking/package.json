@@ -1,7 +1,7 @@
 {
   "name": "browser-ranking",
   "version": "0.0.1",
-  "description": "A demo application of Proteus using RSocket from a Browser",
+  "description": "A demo application of Netifi using RSocket from a Browser",
   "main": "index.js",
   "repository": "https://github.com/netifi/reactivesummit-demo",
   "author": "Stephane Maldini <smaldini@pivotal.io>",
